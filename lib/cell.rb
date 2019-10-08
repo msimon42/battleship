@@ -21,11 +21,11 @@ class Cell
   end
 
   def render
-    if self.fired_upon == false
+    if !self.fired_upon
       '.'
-    elsif self.fired_upon == true && self.ship == nil
+    elsif self.fired_upon && self.ship == nil
       'M'
-    elsif self.fired_upon == true && self.ship.sunk == false
+    elsif self.fired_upon && !self.ship.sunk
       'H'
     elsif self.fired_upon && self.ship.sunk
       'X'
