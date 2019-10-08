@@ -1,8 +1,8 @@
 class Cell
-  attr_reader :coordinate, :ship, :empty, :fired_upon
+  attr_reader :coordinates, :ship, :empty, :fired_upon
 
-  def initialize(coordinate)
-    @coordinate = coordinate
+  def initialize(coordinates)
+    @coordinates = coordinates
     @ship = nil
     @empty = true
     @fired_upon = false
