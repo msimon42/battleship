@@ -6,6 +6,7 @@ require_relative '../lib/cell'
 class CellTest < Minitest::Test
 
   def setup
+    @ship_1 = Ship.new("Cruiser", 3)
     @cell = Cell.new("B4")
   end
 
@@ -27,5 +28,36 @@ class CellTest < Minitest::Test
 
   def test_fired_upon
     refute @cell.fired_upon
+  end
+
+  def test_place_ship
+    @cell.place_ship(@ship_1)
+    assert_equal @ship_1, @cell.ship
+    refute @cell.empty
+  end
+
+  def test_fire_upon
+    @cell.fire_upon
+    assert @cell.fired_upon
+  end
+
+  def test_render_empty_cell
+    assert_equal '.', @cell.render
+  end
+
+  def test_render_miss
+    @cell.fire_upon
+    assert_equal 'M', @cell.render
+  end
+
+  def test_render_hit
+    @cell.place_ship(@ship_1)
+    @cell.fire_upon
+    assert_equal 'H', @cell.render
+  end
+
+  def test_render_sunk
+    @cell.place_ship(@ship_1)
+
   end
 end

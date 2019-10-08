@@ -14,7 +14,8 @@ class Cell
   end
 
   def fire_upon
-    true
+    @fired_upon = true
+    
   end
 
   def render
