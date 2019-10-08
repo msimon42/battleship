@@ -15,7 +15,7 @@ class CellTest < Minitest::Test
   end
 
   def test_coordinates
-    assert_equal "B4", cell.coordinates
+    assert_equal "B4", @cell.coordinates
   end
 
   def test_for_ship
@@ -58,6 +58,9 @@ class CellTest < Minitest::Test
 
   def test_render_sunk
     @cell.place_ship(@ship_1)
-
+    @ship_1.hit
+    @ship_1.hit
+    @cell.fire_upon
+    assert_equal 'X', @cell.render
   end
 end
