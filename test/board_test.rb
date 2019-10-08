@@ -1,4 +1,5 @@
 require 'minitest'
+require 'minitest/pride'
 require 'minitest/autorun'
 require_relative '../lib/ship'
 require_relative '../lib/board'
@@ -6,6 +7,8 @@ require_relative '../lib/cell'
 
 class BoardTest < Minitest::Test
   def setup
+    @cruiser = Ship.new("Cruiser", 3)
+    @submarine = Ship.new("Submarine", 2)
     @board = Board.new
   end
 
@@ -28,5 +31,14 @@ class BoardTest < Minitest::Test
   def test_valid_coordinate?
     assert @board.valid_coordinate?('A2')
     refute @board.valid_coordinate?('F5')
+  end
+
+  def test_valid_placement
+    require "pry"; binding.pry
+    assert @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
+    assert @board.valid_placement?(@cruiser, ['A1', 'B1', 'C1'])
+    assert @board.valid_placement?(@submarine, ['B3', 'B4'])
+    assert @board.valid_placement?(@submarine, ['A3', 'B3'])
+    refute @board.valid_placement?(@cruiser, ['A1', 'B2', 'C3'])
   end
 end

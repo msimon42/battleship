@@ -28,8 +28,23 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    rows = [['a1', 'a2', a3, a4], [b1, b2, b3, b4], [c1, c2, c3, c4], [d1, d2, d3, d4]]
-    columns = [[a1, b1, c1, d1], [a2, b2, c3, d2], [a3, b3, c3, d3], [a4, b4, c4, d4]]
+    rows = [['A1', 'A2', 'A3', 'A4'], ['B1', 'B2', 'B3', 'B4'], ['C1', 'C2', 'C3','C4'], ['D1', 'D2', 'D3', 'D4']]
+    columns = [['A1', 'B1', 'C1', 'D1'], ['A2', 'B2', 'C2', 'D2'], ['A3', 'B3', 'C3', 'D3'], ['A4', 'B4', 'C4', 'D4']]
+
+    rows.each do |row|
+      row.each_cons(ship.length) do |combo|
+        puts combo 
+      end
+    end
+
+    columns.each do |column|
+      column.each_cons(ship.length) do |combo|
+        if combo.include?(coordinates)
+          true
+        end
+      end
+    end
+    false
   end
 
-end
+  end
