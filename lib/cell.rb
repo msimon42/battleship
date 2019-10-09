@@ -12,7 +12,8 @@ class Cell
     @empty = false
     @ship = ship
   end
-
+  #board_array.select(random number, random + 1, random + 2)
+  #board_array.select(random number[1-8], random + 4, random + 8)
   def fire_upon
     @fired_upon = true
     if self.ship
@@ -20,8 +21,10 @@ class Cell
     end
   end
 
-  def render
-    if !self.fired_upon
+  def render(player=false)
+    if !self.fired_upon && player
+      'S'
+    elsif !self.fired_upon
       '.'
     elsif self.fired_upon && self.ship == nil
       'M'

@@ -34,11 +34,25 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_placement
+   # require "pry"; binding.pry
+    assert_equal @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
+    assert_equal @board.valid_placement?(@cruiser, ['A1', 'B1', 'C1'])
+    assert_equal @board.valid_placement?(@submarine, ['B3', 'B4'])
+    assert_equal @board.valid_placement?(@submarine, ['A3', 'B3'])
     require "pry"; binding.pry
-    assert @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
-    assert @board.valid_placement?(@cruiser, ['A1', 'B1', 'C1'])
-    assert @board.valid_placement?(@submarine, ['B3', 'B4'])
-    assert @board.valid_placement?(@submarine, ['A3', 'B3'])
     refute @board.valid_placement?(@cruiser, ['A1', 'B2', 'C3'])
   end
+
+  def test_place_ship
+    @board.place_ship(@cruiser, ['A1', 'A2', 'A3'])
+
+    refute @board.cells['A1'].empty
+    assert_equal @board.cells['A2'].ship, @cruiser
+  end
+
+  def test_invalid_placement
+    assert_equal 'Invalid Input',  @board.place_ship(@cruiser, ['F3', 'C2', 'D4'])
+  end
+
+
 end
