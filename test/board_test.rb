@@ -34,13 +34,16 @@ class BoardTest < Minitest::Test
   end
 
   def test_valid_placement
-   # require "pry"; binding.pry
     assert_equal @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
     assert_equal @board.valid_placement?(@cruiser, ['A1', 'B1', 'C1'])
     assert_equal @board.valid_placement?(@submarine, ['B3', 'B4'])
     assert_equal @board.valid_placement?(@submarine, ['A3', 'B3'])
-    require "pry"; binding.pry
     refute @board.valid_placement?(@cruiser, ['A1', 'B2', 'C3'])
+    assert_equal true, @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
+    assert_equal true, @board.valid_placement?(@cruiser, ['A1', 'B1', 'C1'])
+    assert_equal true, @board.valid_placement?(@submarine, ['B3', 'B4'])
+    assert_equal true, @board.valid_placement?(@submarine, ['A3', 'B3'])
+    assert_equal false, @board.valid_placement?(@cruiser, ['A1', 'B2', 'C3'])
   end
 
   def test_place_ship
@@ -55,4 +58,18 @@ class BoardTest < Minitest::Test
   end
 
 
+  def test_render
+    assert_equal "1 2 3 4 \n" + "A #{@board.cells['A1'].render} #{@board.cells['A2'].render} #{@board.cells['A3'].render} #{@board.cells['A4'].render}\n" +
+                     "B #{@board.cells['B1'].render} #{@board.cells['B2'].render} #{@board.cells['B3'].render} #{@board.cells['B4'].render}\n" +
+                     "C #{@board.cells['C1'].render} #{@board.cells['C2'].render} #{@board.cells['C3'].render} #{@board.cells['C4'].render}\n" +
+                     "D #{@board.cells['D1'].render} #{@board.cells['D2'].render} #{@board.cells['D3'].render} #{@board.cells['D4'].render} ", @board.render
+
+
+    @board.place_ship(@cruiser, ['A1', 'A2', 'A3'])
+
+    assert_equal "1 2 3 4 \n" + "A #{@board.cells['A1'].render(true)} #{@board.cells['A2'].render(true)} #{@board.cells['A3'].render(true)} #{@board.cells['A4'].render(true)}
+    \n" + "B #{@board.cells['B1'].render(true)} #{@board.cells['B2'].render(true)} #{@board.cells['B3'].render(true)} #{@board.cells['B4'].render(true)}
+    \n" + "C #{@board.cells['C1'].render(true)} #{@board.cells['C2'].render(true)} #{@board.cells['C3'].render(true)} #{@board.cells['C4'].render(true)}
+    \n" + "D #{@board.cells['D1'].render(true)} #{@board.cells['D2'].render(true)} #{@board.cells['D3'].render(true)} #{@board.cells['D4'].render(true)} ", @board.render(true)
+  end
 end
