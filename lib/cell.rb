@@ -22,16 +22,17 @@ class Cell
   end
 
   def render(player=false)
-    if !self.fired_upon && player
-      'S'
-    elsif !self.fired_upon
-      '.'
-    elsif self.fired_upon && self.ship == nil
+
+    if self.fired_upon && self.ship == nil
       'M'
     elsif self.fired_upon && !self.ship.sunk
       'H'
     elsif self.fired_upon && self.ship.sunk
       'X'
+    elsif player && self.ship && !self.fired_upon
+      'S'
+    elsif !self.fired_upon
+      '.'
     end
   end
 end
