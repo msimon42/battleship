@@ -65,6 +65,11 @@ class Board
       end
     end
   end
+
+  def render
+    return "1 2 3 4 \nA #{self.cells['A1'].render} #{self.cells['A2'].render} #{self.cells['A3'].render} #{self.cells['A4'].render}
+            \nB #{self.cells[B1].render} #{self.cells[B2].render} #{self.cells[B3].render} #{self.cells[B4].render} "
+  end
 end
 
 
