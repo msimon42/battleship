@@ -33,7 +33,7 @@ class Board
     columns = [['A1', 'B1', 'C1', 'D1'], ['A2', 'B2', 'C2', 'D2'], ['A3', 'B3', 'C3', 'D3'], ['A4', 'B4', 'C4', 'D4']]
 
     coordinates.each do |coordinate|
-      if self.cells[coordinate].ship
+      if self.cells[coordinate] == nil || self.cells[coordinate].ship
         return false
       end
     end
