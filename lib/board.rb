@@ -33,7 +33,9 @@ class Board
 
     rows.each do |row|
       row.each_cons(ship.length) do |combo|
-        puts combo 
+        if combo.include?(coordinates)
+          true
+        end
       end
     end
 
@@ -46,5 +48,4 @@ class Board
     end
     false
   end
-
-  end
+end
