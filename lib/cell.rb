@@ -14,6 +14,11 @@ class Cell
   end
   #board_array.select(random number, random + 1, random + 2)
   #board_array.select(random number[1-8], random + 4, random + 8)
+  
+  # def fired_upon?
+  #  @fired_upon
+  # end
+
   def fire_upon
     @fired_upon = true
     if self.ship

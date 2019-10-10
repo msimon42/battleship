@@ -33,10 +33,6 @@ class TurnTest < Minitest::Test
     skip
   end
 
-  def test_comp_guess_is_valid
-    skip
-  end
-
   def test_cell_status_is_shot
     skip
   end
@@ -56,9 +52,7 @@ class TurnTest < Minitest::Test
   def test_for_user_input
     skip
   end
-
-  def test_user_input_is_valid
-    skip
-    assert_equal true, @turn.valid_guess('A1')
-  end
 end
+
+# turn makes sure cells and board rendering correctly
+# ends with feedback: "speak" is method in player

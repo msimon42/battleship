@@ -59,6 +59,8 @@ class CellTest < Minitest::Test
     assert_equal 'H', @cell.render
   end
 
+  # test for 'S'
+
   def test_render_sunk
     @cell.place_ship(@ship_1)
     @ship_1.hit
