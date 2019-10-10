@@ -66,31 +66,20 @@ class Board
     end
   end
 
+
   def render(player=false)
      if player
        "1 2 3 4 \n" + "A #{self.cells['A1'].render(true)} #{self.cells['A2'].render(true)} #{self.cells['A3'].render(true)} #{self.cells['A4'].render(true)}\n" +
-         "B #{self.cells['B1'].render(true)} #{self.cells['B2'].render(true)} #{self.cells['B3'].render(true)} #{self.cells['B4'].render(true)}\n" +
-         "C #{self.cells['C1'].render(true)} #{self.cells['C2'].render(true)} #{self.cells['C3'].render(true)} #{self.cells['C4'].render(true)}\n" +
-         "D #{self.cells['D1'].render(true)} #{self.cells['D2'].render(true)} #{self.cells['D3'].render(true)} #{self.cells['D4'].render(true)}"
+       "B #{self.cells['B1'].render(true)} #{self.cells['B2'].render(true)} #{self.cells['B3'].render(true)} #{self.cells['B4'].render(true)}\n" +
+       "C #{self.cells['C1'].render(true)} #{self.cells['C2'].render(true)} #{self.cells['C3'].render(true)} #{self.cells['C4'].render(true)}\n" +
+       "D #{self.cells['D1'].render(true)} #{self.cells['D2'].render(true)} #{self.cells['D3'].render(true)} #{self.cells['D4'].render(true)}"
      else
-       "1 2 3 4 \n" + "A #{self.cells['A1'].render} #{self.cells['A2'].render} #{self.cells['A3'].render} #{self.cells['A4'].render}\n" +
-            "B #{self.cells['B1'].render} #{self.cells['B2'].render} #{self.cells['B3'].render} #{self.cells['B4'].render}\n" +
-            "C #{self.cells['C1'].render} #{self.cells['C2'].render} #{self.cells['C3'].render} #{self.cells['C4'].render}\n" +
-            "D #{self.cells['D1'].render} #{self.cells['D2'].render} #{self.cells['D3'].render} #{self.cells['D4'].render}"
-    end
+
+    "1 2 3 4 \n" +
+    "A #{self.cells['A1'].render} #{self.cells['A2'].render} #{self.cells['A3'].render} #{self.cells['A4'].render}\n" +
+    "B #{self.cells['B1'].render} #{self.cells['B2'].render} #{self.cells['B3'].render} #{self.cells['B4'].render}\n" +
+    "C #{self.cells['C1'].render} #{self.cells['C2'].render} #{self.cells['C3'].render} #{self.cells['C4'].render}\n" +
+    "D #{self.cells['D1'].render} #{self.cells['D2'].render} #{self.cells['D3'].render} #{self.cells['D4'].render}"
+      end
   end
 end
-
-
-board = Board.new
-cruiser = Ship.new('cruiser', 3)
-
-puts board.render
-
-board.place_ship(cruiser, ['A1', 'A2', 'A3'])
-
-puts board.render(true)
-board.cells['A1'].fire_upon
-puts board.render(true)
-
-
