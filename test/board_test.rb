@@ -39,7 +39,11 @@ class BoardTest < Minitest::Test
     assert_equal true, @board.valid_placement?(@submarine, ['B3', 'B4'])
     assert_equal true, @board.valid_placement?(@submarine, ['A3', 'B3'])
     assert_equal false, @board.valid_placement?(@cruiser, ['A1', 'B2', 'C3'])
+
     # more invalid placement tests
+
+    assert_equal false, @board.valid_placement?(@cruiser, ['A1', 'A2'])
+
   end
 
   def test_place_ship
@@ -68,3 +72,5 @@ class BoardTest < Minitest::Test
                       "D #{@board.cells['D1'].render(true)} #{@board.cells['D2'].render(true)} #{@board.cells['D3'].render(true)} #{@board.cells['D4'].render(true)}", @board.render(true)
   end
 end
+
+
