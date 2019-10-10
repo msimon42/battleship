@@ -1,8 +1,8 @@
 class Turn
   attr_reader :guess
 
-  def initialize(guess)
-    @guess = guess
+  def initialize
+    @guess = guess #gets.chomp?
     @board_human = Board.new
     @board_comp = Board.new
   end
