@@ -21,6 +21,9 @@ class Ship_test < Minitest::Test
 
   def test_health
     assert_equal 3, @cruiser.health
+
+    @cruiser.hit #repetitive, test below doing same
+    assert_equal 2, @cruiser.health
   end
 
   def test_hit

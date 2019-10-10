@@ -28,6 +28,9 @@ class CellTest < Minitest::Test
 
   def test_fired_upon
     refute @cell.fired_upon
+
+    @cell.fire_upon
+    assert_equal true, @cell.fired_upon
   end
 
   def test_place_ship
@@ -55,6 +58,8 @@ class CellTest < Minitest::Test
     @cell.fire_upon
     assert_equal 'H', @cell.render
   end
+
+  # test for 'S'
 
   def test_render_sunk
     @cell.place_ship(@ship_1)
