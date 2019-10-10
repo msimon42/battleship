@@ -1,7 +1,7 @@
 require_relative 'cell'
 require_relative 'ship'
 class Board
-  attr_reader :cells
+  attr_reader :cells, :rows, :columns
 
   def initialize
     @cells = {
@@ -22,6 +22,9 @@ class Board
         'D3' => Cell.new('D3'),
         'D4' => Cell.new('D4')
     }
+
+    @rows = [['A1', 'A2', 'A3', 'A4'], ['B1', 'B2', 'B3', 'B4'], ['C1', 'C2', 'C3','C4'], ['D1', 'D2', 'D3', 'D4']]
+    @columns = [['A1', 'B1', 'C1', 'D1'], ['A2', 'B2', 'C2', 'D2'], ['A3', 'B3', 'C3', 'D3'], ['A4', 'B4', 'C4', 'D4']]
   end
 
   def valid_coordinate?(coordinate)
@@ -29,8 +32,6 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    rows = [['A1', 'A2', 'A3', 'A4'], ['B1', 'B2', 'B3', 'B4'], ['C1', 'C2', 'C3','C4'], ['D1', 'D2', 'D3', 'D4']]
-    columns = [['A1', 'B1', 'C1', 'D1'], ['A2', 'B2', 'C2', 'D2'], ['A3', 'B3', 'C3', 'D3'], ['A4', 'B4', 'C4', 'D4']]
 
     coordinates.each do |coordinate|
       if self.cells[coordinate] == nil || self.cells[coordinate].ship
@@ -38,7 +39,7 @@ class Board
       end
     end
 
-    rows.each do |row|
+    self.rows.each do |row|
       row.each_cons(ship.length) do |combo|
         if combo == coordinates
           return true
@@ -46,7 +47,7 @@ class Board
       end
     end
 
-    columns.each do |column|
+    self.columns.each do |column|
       column.each_cons(ship.length) do |combo|
         if combo == coordinates
            return true
