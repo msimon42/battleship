@@ -28,6 +28,9 @@ class CellTest < Minitest::Test
 
   def test_fired_upon
     refute @cell.fired_upon
+
+    @cell.fire_upon
+    assert_equal true, @cell.fired_upon
   end
 
   def test_place_ship

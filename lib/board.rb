@@ -81,17 +81,5 @@ class Board
     "C #{self.cells['C1'].render} #{self.cells['C2'].render} #{self.cells['C3'].render} #{self.cells['C4'].render}\n" +
     "D #{self.cells['D1'].render} #{self.cells['D2'].render} #{self.cells['D3'].render} #{self.cells['D4'].render}"
       end
-
   end
 end
-
-board = Board.new
-cruiser = Ship.new('cruiser', 3)
-
-puts board.render
-
-board.place_ship(cruiser, ['A1', 'A2', 'A3'])
-
-puts board.render(true)
-board.cells['A1'].fire_upon
-puts board.render(true)
