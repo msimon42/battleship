@@ -93,5 +93,5 @@ board.place_ship(cruiser, ['A1', 'A2', 'A3'])
 puts board.render(true)
 board.cells['A1'].fire_upon
 puts board.render(true)
-
+puts board.cells.to_a.sample
 
