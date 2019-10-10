@@ -21,7 +21,7 @@ class Player
         return guess if @board.valid_coordinate?(guess)
       end
     end
-    guess
+    guess #fix this if there is time
   end
 
   def generate_placement(ship)
@@ -40,11 +40,21 @@ class Player
     end
   end
 
-  def place_ship(ship, coordinates=Array.new)
+  def place_ship(ship)
     if self.is_computer
       @board.place_ship(ship, self.generate_placement(ship))
     else
-      @board.place_ship(ship, coordinates)
+      loop do
+        puts "Enter the coordinates for your #{ship.name}"
+        coordinates = gets.chomp
+        unless @board.valid_placement?(ship, coordinates)
+          puts "You have entered invalid coordinates for your #{ship.name}. Please try again."
+          next
+        end
+        @board.place_ship(ship, coordinates)
+      end
+
+
     end
   end
 
