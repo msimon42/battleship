@@ -47,23 +47,13 @@ class Player
       loop do
         puts "Enter the coordinates for your #{ship.name}"
         coordinates = gets.chomp
-        unless @board.valid_placement?(ship, coordinates)
-          puts "You have entered invalid coordinates for your #{ship.name}. Please try again."
-          next
-        end
-        @board.place_ship(ship, coordinates)
+        placement = @board.place_ship(ship, coordinates.tr(",", "").split(" "))
+        next if placement == "Invalid Input"
+        placement
+        break
       end
-
-
     end
   end
-
-  # def fire(cell='')
-  #   if self.is_computer
-  #     cell = @board.cells[@board.cells.keys.sample]
-  #   end
-  #   cell.fire_upon
-  # end
 
   def speak(situation, cell = '')
     situations = {
@@ -87,4 +77,5 @@ p matt.generate_placement(matt.ships[:Cruiser])
 p matt.place_ship(matt.ships[:Cruiser])
 #p matt.fire
 puts matt.board.render(true)
-puts other_matt.guess
+puts other_matt.place_ship(other_matt.ships[:Cruiser])
+puts other_matt.board.render(true)
