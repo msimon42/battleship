@@ -20,7 +20,16 @@ class Game
     puts "Press 'p' to play"
     input = gets.chomp
     if input == 'p'
+      self.computer_player.speak(:beginning)
+      loop do
+        puts "Enter the coordinates for your cruiser: "
+        cruiser_coordinates = gets.chomp
 
+        puts "Enter the coordinates for your submarine: "
+        sub_coordinates = gets.chomp
+
+
+      end
     end
   end
 
