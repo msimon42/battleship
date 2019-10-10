@@ -11,8 +11,17 @@ class Player
     @ships = {:Cruiser=>Ship.new('Cruiser', 3), :Submarine=>Ship.new('Submarine', 2)}
   end
 
-  def take_turn
-
+  def guess
+    if self.is_computer
+      guess = @board.cells.keys.sample
+    else
+      loop do
+        puts "Enter your guess: "
+        guess = gets.chomp
+        return guess if @board.valid_coordinate?(guess)
+      end
+    end
+    guess
   end
 
   def generate_placement(ship)
@@ -27,6 +36,7 @@ class Player
     loop do
        placement = possible_placements.sample
        return placement if @board.valid_placement?(ship, placement)
+       "Cell not found."
     end
   end
 
@@ -49,18 +59,22 @@ class Player
     situations = {
         :beginning => "I have laid out my ships on the grid. It is now your turn to lay out your ships.",
         :after_turn_hit => "No!! Your shot on #{cell} was a hit!",
-        :after_turn_miss => "Your shot on #{cell} was a miss! Better luck next time!",
+        :after_turn_miss => "Your shot on #{cell} was a miss! Better luck next time!"
 
 
     }
+
+    situations[situation]
   end
 
 
 end
 
 matt = Player.new(true)
+other_matt = Player.new
 p matt.is_computer
 p matt.generate_placement(matt.ships[:Cruiser])
 p matt.place_ship(matt.ships[:Cruiser])
-p matt.fire
+#p matt.fire
 puts matt.board.render(true)
+puts other_matt.guess

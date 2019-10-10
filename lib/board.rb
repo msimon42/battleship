@@ -31,6 +31,8 @@ class Board
     @cells.has_key?(coordinate)
   end
 
+
+
   def valid_placement?(ship, coordinates)
 
     coordinates.each do |coordinate|
@@ -84,4 +86,3 @@ class Board
       end
   end
 end
-
