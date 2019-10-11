@@ -43,7 +43,7 @@ class Board
 
     self.rows.each do |row|
       row.each_cons(ship.length) do |combo|
-        if combo == coordinates
+        if combo == coordinates || combo == coordinates.reverse
           return true
         end
       end
@@ -51,7 +51,7 @@ class Board
 
     self.columns.each do |column|
       column.each_cons(ship.length) do |combo|
-        if combo == coordinates
+        if combo == coordinates || combo == coordinates.reverse
            return true
         end
       end
