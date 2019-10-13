@@ -18,12 +18,14 @@ class TurnTest < Minitest::Test
     refute @turn.board_human.cells['A1'].fired_upon
     @turn.computer_fire_shot
     assert_equal true, @turn.board_human.cells['A1'].fired_upon
+    assert_equal 'M', @turn.board_human.cells['A1'].render
   end
 
   def test_human_shot_affects_comp_board
     refute @turn.board_comp.cells['B1'].fired_upon
     @turn.human_fire_shot
     assert_equal true, @turn.board_comp.cells['B1'].fired_upon
+    assert_equal 'M', @turn.board_comp.cells['B1'].render
   end
 
   def test_ship_health_decreases_with_shot
@@ -43,5 +45,4 @@ class TurnTest < Minitest::Test
   end
 end
 
-# turn makes sure cells and board rendering correctly
 # ends with feedback: "speak" is method in player
