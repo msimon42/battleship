@@ -11,4 +11,8 @@ class Turn
   def computer_fire_shot
     @board_human.cells[@comp_guess].fire_upon
   end
+
+  def human_fire_shot
+    @board_comp.cells[@human_guess].fire_upon
+  end
 end

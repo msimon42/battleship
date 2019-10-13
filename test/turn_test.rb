@@ -21,7 +21,9 @@ class TurnTest < Minitest::Test
   end
 
   def test_human_shot_affects_comp_board
-    skip
+    refute @turn.board_comp.cells['B1'].fired_upon
+    @turn.human_fire_shot
+    assert_equal true, @turn.board_comp.cells['B1'].fired_upon
   end
 
   def test_ship_health_decreases_with_shot
