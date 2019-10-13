@@ -31,7 +31,16 @@ class Board
     @cells.has_key?(coordinate)
   end
 
-
+  def generate_possible_placements(ship)
+    possible_placements = Array.new
+    self.rows.each do |row|
+      row.each_cons(ship.length) {|coordinates| possible_placements << coordinates}
+    end
+    self.columns.each do |column|
+      column.each_cons(ship.length) {|coordinates| possible_placements << coordinates}
+    end
+    possible_placements
+  end
 
   def valid_placement?(ship, coordinates)
 
@@ -41,21 +50,24 @@ class Board
       end
     end
 
-    self.rows.each do |row|
-      row.each_cons(ship.length) do |combo|
-        if combo == coordinates
-          return true
-        end
-      end
-    end
-
-    self.columns.each do |column|
-      column.each_cons(ship.length) do |combo|
-        if combo == coordinates
-           return true
-        end
-      end
-    end
+    return true if self.generate_possible_placements(ship).include?(coordinates) ||
+        self.generate_possible_placements(ship).include?(coordinates.reverse)
+    #
+    # self.rows.each do |row|
+    #   row.each_cons(ship.length) do |combo|
+    #     if combo == coordinates || combo == coordinates.reverse
+    #       return true
+    #     end
+    #   end
+    # end
+    #
+    # self.columns.each do |column|
+    #   column.each_cons(ship.length) do |combo|
+    #     if combo == coordinates || combo == coordinates.reverse
+    #        return true
+    #     end
+    #   end
+    # end
     false
   end
 
