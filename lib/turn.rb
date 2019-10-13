@@ -1,22 +1,14 @@
 class Turn
-  attr_reader :guess
+  attr_reader :comp_guess, :human_guess, :board_comp, :board_human
 
-  def initialize(guess)
-    @guess = guess
-    @board_human = Board.new
+  def initialize(comp_guess, human_guess)
+    @comp_guess = comp_guess
+    @human_guess = human_guess
     @board_comp = Board.new
+    @board_human = Board.new
   end
 
-  def display_human_board
-    @board_human.render(true)
-  end
-
-  def display_computer_board
-    @board_comp.render
-  end
-
-  def valid_guess(guess)
-     @board_human.valid_coordinate?('A1')
-     @board_comp.valid_coordinate?('A1')
+  def computer_fire_shot
+    @board_human.cells[@comp_guess].fire_upon
   end
 end
