@@ -22,11 +22,11 @@ class Turn
   def human_fire_shot
     shot = self.comp_player.board.fire_upon(@human_guess)
     if shot == 'Hit'
-      puts @comp_player.speak(:human_hit, @comp_player.board.cells[@human_guess])
+      puts @comp_player.speak(:human_hit, @human_guess)
     elsif shot == 'Miss'
-      puts @comp_player.speak(:human_miss, @comp_player.board.cells[@human_guess])
+      puts @comp_player.speak(:human_miss, @human_guess)
     elsif shot == 'Sunk'
-      puts @comp_player.speak(:human_sunk, @comp_player.board.cells[@human_guess])
+      puts @comp_player.speak(:human_sunk, @human_guess, @comp_player.board.cells[@comp_guess].ship.name)
     end
   end
 end
