@@ -24,23 +24,35 @@ class Game
       puts "Enter the coordinates for your #{ship.name}: "
       ship_coordinates = gets.chomp
       unless @human_player.board.valid_placement?(@human_player.ships[ship.name.capitalize.to_sym], ship_coordinates.tr(",", "").split(" "))
-         "The coordinates for your #{ship.name} are invalid. Please try again"
+         puts "The coordinates for your #{ship.name} are invalid. Please try again"
           next
       end
       return ship_coordinates
     end
   end
 
-  def play_game
+  def render_boards
+    puts '=============HUMAN BOARD=============='
+    puts @human_player.board.render(true)
+    puts '============COMPUTER BOARD============'
+    puts @computer_player.board.render
+  end
+
+  def turn_loop
     until @human_player.ships_sunk? || @computer_player.ships_sunk?
       human_guess = @human_player.guess
       computer_guess = @computer_player.guess
       turn = Turn.new(computer_guess, human_guess, self.computer_player, self.human_player)
       puts turn.human_fire_shot
       puts turn.computer_fire_shot
-      puts @human_player.board.render(true)
-      puts @computer_player.board.render
+      self.render_boards
     end
+  end
+
+  def play_game
+    puts "Let's Begin!"
+    puts @computer_player.board.render
+    self.turn_loop
     if @human_player.ships_sunk?
       @winner = @computer_player
     elsif @computer_player.ships_sunk?
@@ -50,7 +62,11 @@ class Game
 
   def end_game
     if @winner == @computer_player
-
+      puts @computer_player.speak(:computer_won)
+    elsif @winner == @human_player
+      puts @computer_player.speak(:computer_lost)
+    else
+      puts 'Nobody won..?'
     end
   end
 
@@ -58,7 +74,8 @@ class Game
     puts "WELCOME TO BATTLESHIP"
     puts '*' * 75
     puts "Press 'p' to play"
-    return input = gets.chomp
+    puts "Press 'q' to quit"
+    input = gets.chomp
   end
 
   def start
@@ -82,6 +99,6 @@ class Game
   end
 end
 
-game = Game.new
-puts game.start
-puts game.play_game
+# game = Game.new
+# puts game.start
+# puts game.play_game
