@@ -34,8 +34,10 @@ class Game
   def render_boards
     puts '=============HUMAN BOARD=============='
     puts @human_player.board.render(true)
+    puts ''
     puts '============COMPUTER BOARD============'
     puts @computer_player.board.render
+    puts ''
   end
 
   def turn_loop
@@ -51,7 +53,7 @@ class Game
 
   def play_game
     puts "Let's Begin!"
-    puts @computer_player.board.render
+    self.render_boards
     self.turn_loop
     if @human_player.ships_sunk?
       @winner = @computer_player
@@ -87,7 +89,6 @@ class Game
     puts @human_player.board.render(true)
     sub_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Submarine])
     @human_player.place_ship(@human_player.ships[:Submarine], sub_coordinates.tr(",", "").split(" "))
-    puts @human_player.board.render(true)
   end
 
   def display_board_human
