@@ -13,7 +13,10 @@ class Player
 
   def guess
     if self.is_computer
-      guess = @board.cells.keys.sample
+      loop do
+        guess = @board.cells.keys.sample
+        return guess if @board.valid_coordinate?(guess)
+      end
     else
       loop do
         puts "Enter your guess: "
@@ -22,7 +25,6 @@ class Player
         puts "Coordinate not found"
       end
     end
-    guess #fix this if there is time
   end
 
   def ships_sunk?
