@@ -19,6 +19,7 @@ class Player
         puts "Enter your guess: "
         guess = gets.chomp
         return guess if @board.valid_coordinate?(guess)
+        puts "Coordinate not found"
       end
     end
     guess #fix this if there is time
