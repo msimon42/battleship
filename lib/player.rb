@@ -22,7 +22,7 @@ class Player
         puts "Enter your guess: "
         guess = gets.chomp
         return guess if @board.valid_coordinate?(guess)
-        puts "Coordinate not found"
+        puts "Coordinate not found or has already been fired upon."
       end
     end
   end
