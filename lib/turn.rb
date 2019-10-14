@@ -1,22 +1,32 @@
 class Turn
-  attr_reader :guess
+  attr_reader :comp_guess, :human_guess, :comp_player, :human_player
 
-  def initialize(guess)
-    @guess = guess
-    @board_human = Board.new
-    @board_comp = Board.new
+  def initialize(comp_guess, human_guess, comp_player, human_player)
+    @comp_guess = comp_guess
+    @human_guess = human_guess
+    @comp_player = comp_player
+    @human_player = human_player
   end
 
-  def display_human_board
-    @board_human.render(true)
+  def computer_fire_shot
+     shot = self.human_player.board.fire_upon(@comp_guess)
+     if shot == 'Hit'
+       puts @comp_player.speak(:computer_hit, @human_player.board.cells[@comp_guess])
+     elsif shot == 'Miss'
+       puts @comp_player.speak(:computer_miss, @human_player.board.cells[@comp_guess])
+     elsif shot == 'Sunk'
+       puts @comp_player.speak(:computer_sunk, @human_player.board.cells[@comp_guess])
+     end
   end
 
-  def display_computer_board
-    @board_comp.render
-  end
-
-  def valid_guess(guess)
-     @board_human.valid_coordinate?('A1')
-     @board_comp.valid_coordinate?('A1')
+  def human_fire_shot
+    shot = self.comp_player.board.fire_upon(@human_guess)
+    if shot == 'Hit'
+      @comp_player.speak(:human_hit, @comp_player.board.cells[@human_guess])
+    elsif shot == 'Miss'
+      @comp_player.speak(:human_miss, @comp_player.board.cells[@human_guess])
+    elsif shot == 'Sunk'
+      @comp_player.speak(:human_sunk, @comp_player.board.cells[@human_guess])
+    end
   end
 end
