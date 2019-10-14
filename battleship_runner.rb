@@ -1,8 +1,7 @@
 require_relative 'lib/game'
 
-game = Game.new
-
 loop do
+  game = Game.new
   input = game.main_menu
   break if input == 'q'
   game.start
