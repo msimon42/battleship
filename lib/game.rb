@@ -38,7 +38,7 @@ class Game
       turn = Turn.new(computer_guess, human_guess, self.computer_player, self.human_player)
       puts turn.human_fire_shot
       puts turn.computer_fire_shot
-      puts @human_player.board.render
+      puts @human_player.board.render(true)
       puts @computer_player.board.render
     end
     if @human_player.ships_sunk?
