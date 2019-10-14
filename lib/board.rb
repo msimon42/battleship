@@ -42,6 +42,10 @@ class Board
     possible_placements
   end
 
+  def fire_upon(cell)
+    self.cells[cell].fire_upon
+  end
+
   def valid_placement?(ship, coordinates)
 
     coordinates.each do |coordinate|
