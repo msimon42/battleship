@@ -54,24 +54,24 @@ class Game
     end
   end
 
-  def start
+  def main_menu
     puts "WELCOME TO BATTLESHIP"
     puts '*' * 75
     puts "Press 'p' to play"
-    input = gets.chomp
-    if input == 'p'
-      self.place_computer_ships
-      puts self.computer_player.speak(:beginning)
-      puts @human_player.board.render(true)
-      cruiser_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Cruiser])
-      @human_player.place_ship(@human_player.ships[:Cruiser], cruiser_coordinates.tr(",", "").split(" "))
-      puts @human_player.board.render(true)
-      sub_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Submarine])
-      @human_player.place_ship(@human_player.ships[:Submarine], sub_coordinates.tr(",", "").split(" "))
-      puts @human_player.board.render(true)
-    end
+    return input = gets.chomp
   end
 
+  def start
+    self.place_computer_ships
+    puts self.computer_player.speak(:beginning)
+    puts @human_player.board.render(true)
+    cruiser_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Cruiser])
+    @human_player.place_ship(@human_player.ships[:Cruiser], cruiser_coordinates.tr(",", "").split(" "))
+    puts @human_player.board.render(true)
+    sub_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Submarine])
+    @human_player.place_ship(@human_player.ships[:Submarine], sub_coordinates.tr(",", "").split(" "))
+    puts @human_player.board.render(true)
+  end
 
   def display_board_human
     @human_player.board.render(true)
