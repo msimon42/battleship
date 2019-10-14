@@ -57,17 +57,17 @@ class Player
     end
   end
 
-  def speak(situation, cell=Cell.new(nil))
+  def speak(situation, cell='', ship='')
     situations = {
         :beginning => "I have laid out my ships on the grid. It is now your turn to lay out your ships. The Cruiser is 3 units long, and the Submarine is 2 units long.",
-        # :human_hit => "No!! Your shot on #{cell.coordinates} was a hit!",
-        # :human_miss => "Your shot on #{cell.coordinates} was a miss! Better luck next time!",
-        # :human_sunk => "I hope you're happy. You sunk my #{cell.ship.name}",
-        # :computer_hit => "Ha! My shot on #{cell.coordinates} was a hit",
-        # :computer_miss => "Dammit! My shot on #{cell.coordinates} was a miss",
-        # :computer_sunk => "Yes!!!!! Your #{cell.ship.name} has been sunk!!",
-        # :computer_won => "I have won! Better luck next time I guess.",
-        # :computer_lost => "I have been defeated! You are the superior being."
+        :human_hit => "No!! Your shot on #{cell} was a hit!",
+        :human_miss => "Your shot on #{cell} was a miss! Better luck next time!",
+        :human_sunk => "I hope you're happy. You sunk my #{ship}",
+        :computer_hit => "Ha! My shot on #{cell} was a hit",
+        :computer_miss => "Dammit! My shot on #{cell} was a miss",
+        :computer_sunk => "Yes!!!!! Your #{ship} has been sunk!!",
+        :computer_won => "I have won! Better luck next time I guess.",
+        :computer_lost => "I have been defeated! You are the superior being."
     }
     situations[situation]
   end
