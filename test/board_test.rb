@@ -56,7 +56,9 @@ class BoardTest < Minitest::Test
     assert_equal 'Invalid Input',  @board.place_ship(@cruiser, ['F3', 'C2', 'D4'])
   end
 
-  def test_generate_possible_p
+
+  
+  def test_generate_possible_placements
     eachcons = Array.new
     @board.rows.each {|row| row.each_cons(3) {|coordinates| eachcons << coordinates}}
     @board.columns.each {|col| col.each_cons(3) {|coordinates| eachcons << coordinates}}

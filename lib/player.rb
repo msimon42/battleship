@@ -29,6 +29,8 @@ class Player
 
   def ships_sunk?
     @ships.all? {|ship| ship[1].sunk}
+      end
+    end
   end
 
   def generate_placement(ship) ##Refactor using board.generate_possible_placements
@@ -46,6 +48,7 @@ class Player
        "Cell not found."
     end
   end
+
 
   def place_ship(ship, coordinates='')
     if self.is_computer
@@ -76,12 +79,4 @@ class Player
   end
 end
 
-# matt = Player.new(true)
-# other_matt = Player.new
-# p matt.is_computer
-# p matt.generate_placement(matt.ships[:Cruiser])
-# p matt.place_ship(matt.ships[:Cruiser])
-# #p matt.fire
-# puts matt.board.render(true)
-# puts other_matt.place_ship(other_matt.ships[:Cruiser])
-# puts other_matt.board.render(true)
+

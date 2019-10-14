@@ -46,6 +46,17 @@ class Board
     self.cells[cell].fire_upon
   end
 
+  def generate_possible_placements(ship)
+    possible_placements = Array.new
+    self.rows.each do |row|
+      row.each_cons(ship.length) {|coordinates| possible_placements << coordinates}
+    end
+    self.columns.each do |column|
+      column.each_cons(ship.length) {|coordinates| possible_placements << coordinates}
+    end
+    possible_placements
+  end
+
   def valid_placement?(ship, coordinates)
 
     coordinates.each do |coordinate|
