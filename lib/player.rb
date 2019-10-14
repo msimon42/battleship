@@ -29,8 +29,6 @@ class Player
 
   def ships_sunk?
     @ships.all? {|ship| ship[1].sunk}
-      end
-    end
   end
 
   def generate_placement(ship) ##Refactor using board.generate_possible_placements
