@@ -35,15 +35,14 @@ class BoardTest < Minitest::Test
 
   def test_valid_placement
     assert_equal true, @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
+    assert_equal true, @board.valid_placement?(@submarine, ['D2', 'D1'])
     assert_equal true, @board.valid_placement?(@cruiser, ['A1', 'B1', 'C1'])
     assert_equal true, @board.valid_placement?(@submarine, ['B3', 'B4'])
     assert_equal true, @board.valid_placement?(@submarine, ['A3', 'B3'])
     assert_equal false, @board.valid_placement?(@cruiser, ['A1', 'B2', 'C3'])
-
-    # more invalid placement tests
-
+    assert_equal false, @board.valid_placement?(@submarine, ['A1', 'A2', 'A3'])
     assert_equal false, @board.valid_placement?(@cruiser, ['A1', 'A2'])
-
+    assert_equal false, @board.valid_placement?(@cruiser, ['C5', 'F7', 'W3'])
   end
 
   def test_place_ship
@@ -57,6 +56,8 @@ class BoardTest < Minitest::Test
     assert_equal 'Invalid Input',  @board.place_ship(@cruiser, ['F3', 'C2', 'D4'])
   end
 
+
+  
   def test_generate_possible_placements
     eachcons = Array.new
     @board.rows.each {|row| row.each_cons(3) {|coordinates| eachcons << coordinates}}

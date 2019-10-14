@@ -24,6 +24,13 @@ class Cell
     @fired_upon = true
     if self.ship
       @ship.hit
+    else
+      return 'Miss'
+    end
+    if self.ship.sunk
+      'Sunk'
+    else
+      'Hit'
     end
   end
 

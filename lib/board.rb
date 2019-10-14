@@ -28,7 +28,22 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    @cells.has_key?(coordinate)
+    @cells.has_key?(coordinate) && !@cells[coordinate].fired_upon
+  end
+
+  def generate_possible_placements(ship)
+    possible_placements = Array.new
+    self.rows.each do |row|
+      row.each_cons(ship.length) {|coordinates| possible_placements << coordinates}
+    end
+    self.columns.each do |column|
+      column.each_cons(ship.length) {|coordinates| possible_placements << coordinates}
+    end
+    possible_placements
+  end
+
+  def fire_upon(cell)
+    self.cells[cell].fire_upon
   end
 
   def generate_possible_placements(ship)
@@ -52,22 +67,7 @@ class Board
 
     return true if self.generate_possible_placements(ship).include?(coordinates) ||
         self.generate_possible_placements(ship).include?(coordinates.reverse)
-    #
-    # self.rows.each do |row|
-    #   row.each_cons(ship.length) do |combo|
-    #     if combo == coordinates || combo == coordinates.reverse
-    #       return true
-    #     end
-    #   end
-    # end
-    #
-    # self.columns.each do |column|
-    #   column.each_cons(ship.length) do |combo|
-    #     if combo == coordinates || combo == coordinates.reverse
-    #        return true
-    #     end
-    #   end
-    # end
+
     false
   end
 
@@ -84,13 +84,13 @@ class Board
 
   def render(player=false)
      if player
-       "1 2 3 4 \n" + "A #{self.cells['A1'].render(true)} #{self.cells['A2'].render(true)} #{self.cells['A3'].render(true)} #{self.cells['A4'].render(true)}\n" +
+       "  1 2 3 4 \n" + "A #{self.cells['A1'].render(true)} #{self.cells['A2'].render(true)} #{self.cells['A3'].render(true)} #{self.cells['A4'].render(true)}\n" +
        "B #{self.cells['B1'].render(true)} #{self.cells['B2'].render(true)} #{self.cells['B3'].render(true)} #{self.cells['B4'].render(true)}\n" +
        "C #{self.cells['C1'].render(true)} #{self.cells['C2'].render(true)} #{self.cells['C3'].render(true)} #{self.cells['C4'].render(true)}\n" +
        "D #{self.cells['D1'].render(true)} #{self.cells['D2'].render(true)} #{self.cells['D3'].render(true)} #{self.cells['D4'].render(true)}"
      else
 
-    "1 2 3 4 \n" +
+    "  1 2 3 4 \n" +
     "A #{self.cells['A1'].render} #{self.cells['A2'].render} #{self.cells['A3'].render} #{self.cells['A4'].render}\n" +
     "B #{self.cells['B1'].render} #{self.cells['B2'].render} #{self.cells['B3'].render} #{self.cells['B4'].render}\n" +
     "C #{self.cells['C1'].render} #{self.cells['C2'].render} #{self.cells['C3'].render} #{self.cells['C4'].render}\n" +
@@ -98,3 +98,7 @@ class Board
       end
   end
 end
+
+board = Board.new
+puts board.render(true)
+puts board.render
