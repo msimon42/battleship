@@ -28,18 +28,7 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    @cells.has_key?(coordinate) && !@cells[coordinate].fired_upon
-  end
-
-  def generate_possible_placements(ship)
-    possible_placements = Array.new
-    self.rows.each do |row|
-      row.each_cons(ship.length) {|coordinates| possible_placements << coordinates}
-    end
-    self.columns.each do |column|
-      column.each_cons(ship.length) {|coordinates| possible_placements << coordinates}
-    end
-    possible_placements
+    @cells.has_key?(coordinate) && !@cells[coordinate].fired_upon?
   end
 
   def fire_upon(cell)
@@ -67,7 +56,6 @@ class Board
 
     return true if self.generate_possible_placements(ship).include?(coordinates) ||
         self.generate_possible_placements(ship).include?(coordinates.reverse)
-
     false
   end
 
@@ -99,6 +87,3 @@ class Board
   end
 end
 
-board = Board.new
-puts board.render(true)
-puts board.render

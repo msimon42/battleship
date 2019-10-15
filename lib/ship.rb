@@ -6,7 +6,7 @@ class Ship
   def initialize(name, length)
     @name = name
     @length = length
-    @health = self.length #length or @length
+    @health = @length
     @sunk = false
   end
 

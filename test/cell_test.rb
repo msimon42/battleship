@@ -40,6 +40,7 @@ class CellTest < Minitest::Test
   end
 
   def test_fire_upon
+    # Need new tests for return Miss, Sunk, Hit
     @cell.fire_upon
     assert @cell.fired_upon
   end

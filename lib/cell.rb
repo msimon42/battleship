@@ -13,12 +13,10 @@ class Cell
     @empty = false
     @ship = ship
   end
-  #board_array.select(random number, random + 1, random + 2)
-  #board_array.select(random number[1-8], random + 4, random + 8)
   
-  # def fired_upon?
-  #  @fired_upon
-  # end
+  def fired_upon?
+   @fired_upon
+  end
 
   def fire_upon
     @fired_upon = true
@@ -36,15 +34,15 @@ class Cell
 
   def render(player=false)
 
-    if self.fired_upon && self.ship == nil
+    if self.fired_upon? && self.ship == nil
       'M'
-    elsif self.fired_upon && !self.ship.sunk
+    elsif self.fired_upon? && !self.ship.sunk
       'H'
-    elsif self.fired_upon && self.ship.sunk
+    elsif self.fired_upon? && self.ship.sunk
       'X'
-    elsif player && self.ship && !self.fired_upon
+    elsif player && self.ship && !self.fired_upon?
       'S'
-    elsif !self.fired_upon
+    elsif !self.fired_upon?
       '.'
     end
   end

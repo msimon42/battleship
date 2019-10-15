@@ -37,7 +37,11 @@ class Game
   end
 
   def render_boards
+<<<<<<< HEAD
     puts '=============YOUR BOARD=============='
+=======
+    puts '==============YOUR BOARD=============='
+>>>>>>> 32f80cfadd6fa2535f036bb87a178480b63b3afb
     puts @human_player.board.render(true)
     puts ''
     puts '============COMPUTER BOARD============'
@@ -67,6 +71,28 @@ class Game
     end
   end
 
+<<<<<<< HEAD
+=======
+  def main_menu
+    puts "WELCOME TO BATTLESHIP"
+    puts '*' * 75
+    puts "Press 'p' to play"
+    puts "Press 'q' to quit"
+    input = gets.chomp
+  end
+
+  def start
+    self.place_computer_ships
+    puts self.computer_player.speak(:beginning)
+    puts @human_player.board.render(true)
+    cruiser_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Cruiser])
+    @human_player.place_ship(@human_player.ships[:Cruiser], cruiser_coordinates.tr(",", "").split(" "))
+    puts @human_player.board.render(true)
+    sub_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Submarine])
+    @human_player.place_ship(@human_player.ships[:Submarine], sub_coordinates.tr(",", "").split(" "))
+  end
+
+>>>>>>> 32f80cfadd6fa2535f036bb87a178480b63b3afb
   def play_game
     puts "Let's Begin!"
     self.render_boards
@@ -87,9 +113,13 @@ class Game
       puts 'Nobody won..?'
     end
   end
+<<<<<<< HEAD
 
 end
 
 # game = Game.new
 # puts game.start
 # puts game.play_game
+=======
+end
+>>>>>>> 32f80cfadd6fa2535f036bb87a178480b63b3afb
