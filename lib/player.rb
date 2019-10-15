@@ -11,21 +11,21 @@ class Player
     @ships = {:Cruiser=>Ship.new('Cruiser', 3), :Submarine=>Ship.new('Submarine', 2)}
   end
 
-  def guess
-    if self.is_computer
-      loop do
-        guess = @board.cells.keys.sample
-        return guess if @board.valid_coordinate?(guess)
-      end
-    else
-      loop do
-        puts "Enter your guess: "
-        guess = gets.chomp
-        return guess if @board.valid_coordinate?(guess)
-        puts "Coordinate not found or has already been fired upon."
-      end
-    end
-  end
+  # def guess
+  #   if self.is_computer
+  #     loop do
+  #       guess = @board.cells.keys.sample
+  #       return guess if @board.valid_coordinate?(guess)
+  #     end
+  #   else
+  #     loop do
+  #       puts "Enter your guess: "
+  #       guess = gets.chomp
+  #       return guess if @board.valid_coordinate?(guess)
+  #       puts "Coordinate not found or has already been fired upon."
+  #     end
+  #   end
+  # end
 
   def ships_sunk?
     @ships.all? {|ship| ship[1].sunk}
