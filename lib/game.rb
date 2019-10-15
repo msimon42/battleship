@@ -37,7 +37,7 @@ class Game
   end
 
   def render_boards
-    puts '=============HUMAN BOARD=============='
+    puts '=============YOUR BOARD=============='
     puts @human_player.board.render(true)
     puts ''
     puts '============COMPUTER BOARD============'
