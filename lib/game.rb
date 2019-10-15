@@ -11,12 +11,17 @@ class Game
     @winner = nil
   end
 
+  def main_menu
+    puts "WELCOME TO BATTLESHIP"
+    puts '*' * 75
+    puts "Press 'p' to play"
+    puts "Press 'q' to quit"
+    input = gets.chomp
+  end
+
   def place_computer_ships
     @computer_player.place_ship(@computer_player.ships[:Cruiser])
     @computer_player.place_ship(@computer_player.ships[:Submarine])
-
-    # @human_player.place_ship(@human_player.ships[:Cruiser], cruiser_coordinates.tr(",", "").split(" "))
-    # @human_player.place_ship(@human_player.ships[:Submarine], sub_coordinates.tr(",", "").split(" "))
   end
 
   def ask_for_ship_coordinates(ship)
@@ -38,6 +43,17 @@ class Game
     puts '============COMPUTER BOARD============'
     puts @computer_player.board.render
     puts ''
+  end
+
+  def start
+    self.place_computer_ships
+    puts self.computer_player.speak(:beginning)
+    puts @human_player.board.render(true)
+    cruiser_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Cruiser])
+    @human_player.place_ship(@human_player.ships[:Cruiser], cruiser_coordinates.tr(",", "").split(" "))
+    puts @human_player.board.render(true)
+    sub_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Submarine])
+    @human_player.place_ship(@human_player.ships[:Submarine], sub_coordinates.tr(",", "").split(" "))
   end
 
   def turn_loop
@@ -72,32 +88,6 @@ class Game
     end
   end
 
-  def main_menu
-    puts "WELCOME TO BATTLESHIP"
-    puts '*' * 75
-    puts "Press 'p' to play"
-    puts "Press 'q' to quit"
-    input = gets.chomp
-  end
-
-  def start
-    self.place_computer_ships
-    puts self.computer_player.speak(:beginning)
-    puts @human_player.board.render(true)
-    cruiser_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Cruiser])
-    @human_player.place_ship(@human_player.ships[:Cruiser], cruiser_coordinates.tr(",", "").split(" "))
-    puts @human_player.board.render(true)
-    sub_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Submarine])
-    @human_player.place_ship(@human_player.ships[:Submarine], sub_coordinates.tr(",", "").split(" "))
-  end
-
-  def display_board_human
-    @human_player.board.render(true)
-  end
-
-  def display_board_computer
-    @computer_player.board.render
-  end
 end
 
 # game = Game.new
