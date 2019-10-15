@@ -31,14 +31,8 @@ class Player
     @ships.all? {|ship| ship[1].sunk}
   end
 
-  def generate_placement(ship) ##Refactor using board.generate_possible_placements
-    possible_placements = Array.new
-    @board.rows.each do |row|
-      row.each_cons(ship.length) {|coordinates| possible_placements << coordinates}
-    end
-    @board.columns.each do |column|
-      column.each_cons(ship.length) {|coordinates| possible_placements << coordinates}
-    end
+  def generate_placement(ship)
+    possible_placements = @board.generate_possible_placements(ship)
 
     loop do
        placement = possible_placements.sample
@@ -46,7 +40,6 @@ class Player
        "Cell not found."
     end
   end
-
 
   def place_ship(ship, coordinates='')
     if self.is_computer
