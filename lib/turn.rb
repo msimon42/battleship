@@ -8,6 +8,8 @@ class Turn
     @human_player = human_player
   end
 
+
+
   def computer_fire_shot
      shot = self.human_player.board.fire_upon(@comp_guess)
      if shot == 'Hit'
