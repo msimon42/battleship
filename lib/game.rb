@@ -14,9 +14,6 @@ class Game
   def place_computer_ships
     @computer_player.place_ship(@computer_player.ships[:Cruiser])
     @computer_player.place_ship(@computer_player.ships[:Submarine])
-
-    # @human_player.place_ship(@human_player.ships[:Cruiser], cruiser_coordinates.tr(",", "").split(" "))
-    # @human_player.place_ship(@human_player.ships[:Submarine], sub_coordinates.tr(",", "").split(" "))
   end
 
   def ask_for_ship_coordinates(ship)
@@ -32,7 +29,7 @@ class Game
   end
 
   def render_boards
-    puts '=============HUMAN BOARD=============='
+    puts '==============YOUR BOARD=============='
     puts @human_player.board.render(true)
     puts ''
     puts '============COMPUTER BOARD============'
@@ -48,27 +45,6 @@ class Game
       puts turn.human_fire_shot
       puts turn.computer_fire_shot
       self.render_boards
-    end
-  end
-
-  def play_game
-    puts "Let's Begin!"
-    self.render_boards
-    self.turn_loop
-    if @human_player.ships_sunk?
-      @winner = @computer_player
-    elsif @computer_player.ships_sunk?
-      @winner = @human_player
-    end
-  end
-
-  def end_game
-    if @winner == @computer_player
-      puts @computer_player.speak(:computer_won)
-    elsif @winner == @human_player
-      puts @computer_player.speak(:computer_lost)
-    else
-      puts 'Nobody won..?'
     end
   end
 
@@ -91,15 +67,24 @@ class Game
     @human_player.place_ship(@human_player.ships[:Submarine], sub_coordinates.tr(",", "").split(" "))
   end
 
-  def display_board_human
-    @human_player.board.render(true)
+  def play_game
+    puts "Let's Begin!"
+    self.render_boards
+    self.turn_loop
+    if @human_player.ships_sunk?
+      @winner = @computer_player
+    elsif @computer_player.ships_sunk?
+      @winner = @human_player
+    end
   end
 
-  def display_board_computer
-    @computer_player.board.render
+  def end_game
+    if @winner == @computer_player
+      puts @computer_player.speak(:computer_won)
+    elsif @winner == @human_player
+      puts @computer_player.speak(:computer_lost)
+    else
+      puts 'Nobody won..?'
+    end
   end
 end
-
-# game = Game.new
-# puts game.start
-# puts game.play_game
