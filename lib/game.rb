@@ -1,4 +1,4 @@
-
+require 'pry'
 require_relative 'player'
 require_relative 'turn'
 
@@ -81,10 +81,22 @@ class Game
   def guess(player)
     if player == @computer_player
       loop do
-        if @computer_player.hits.length > 0
-          last_hit = @computer_player.hits.last
-          possible_guesses = @human_player.board.find_all_adjacent_cells(last_hit)
+        if @computer_player.hits.length == 1
+          branch_cell = @computer_player.hits[0]
+          possible_guesses = @human_player.board.find_all_adjacent_cells(branch_cell)
           guess = possible_guesses.sample
+        elsif @computer_player.hits.length > 1
+          case @human_player.board.adjacent?(@computer_player.hits.last(2))
+          when 'row'
+            possible_guesses = @computer_player.hits.last(2).flat_map {|hit| @human_player.board.find_adjacent_cells(hit, @human_player.board.rows)}
+            guess = possible_guesses.sample
+          when 'column'
+            possible_guesses = @computer_player.hits.last(2).flat_map {|hit| @human_player.board.find_adjacent_cells(hit, @human_player.board.columns)}
+            guess = possible_guesses.sample
+          else
+
+             guess = @human_player.board.cells.keys.sample
+          end
         else
           guess = @human_player.board.cells.keys.sample
         end
