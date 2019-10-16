@@ -95,7 +95,6 @@ class Game
             possible_guesses = @computer_player.hits.last(2).flat_map {|hit| @human_player.board.find_adjacent_cells(hit, @human_player.board.columns)}
             guess = possible_guesses.sample
           else
-
              guess = @human_player.board.cells.keys.sample
           end
         else
