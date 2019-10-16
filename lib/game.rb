@@ -82,7 +82,9 @@ class Game
     if player == @computer_player
       loop do
         if @computer_player.hits.length > 0
-          guess = @human_player.board.cells[hits.last.succ]
+          last_hit = @computer_player.hits.last
+          possible_guesses = @human_player.board.find_all_adjacent_cells(last_hit)
+          guess = possible_guesses.sample
         else
           guess = @human_player.board.cells.keys.sample
         end
