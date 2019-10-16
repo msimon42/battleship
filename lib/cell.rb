@@ -9,11 +9,15 @@ class Cell
     @fired_upon = false
   end
 
+  def empty?
+    @empty
+  end
+
   def place_ship(ship)
     @empty = false
     @ship = ship
   end
-  
+
   def fired_upon?
    @fired_upon
   end
@@ -47,12 +51,3 @@ class Cell
     end
   end
 end
-
-
-# cell_1 = Cell.new('A1')
-# cell_2 = Cell.new('A2')
-# ship = Ship.new('Cruiser', 3)
-#
-# cell_1.place_ship(ship)
-# p cell_1.render
-# p cell_1.render(true)
