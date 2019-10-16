@@ -1,4 +1,4 @@
-
+require 'pry'
 require_relative 'player'
 require_relative 'turn'
 
@@ -43,6 +43,7 @@ class Game
       computer_guess = self.guess(@computer_player)
       turn = Turn.new(computer_guess, human_guess, self.computer_player, self.human_player)
       puts turn.human_fire_shot
+      break if @computer_player.ships_sunk?
       puts turn.computer_fire_shot
       self.render_boards
     end
@@ -81,8 +82,21 @@ class Game
   def guess(player)
     if player == @computer_player
       loop do
-        if @computer_player.hits.length > 0
-          guess = @human_player.board.cells[hits.last.succ]
+        if @computer_player.hits.length == 1
+          branch_cell = @computer_player.hits[0]
+          possible_guesses = @human_player.board.find_all_adjacent_cells(branch_cell)
+          guess = possible_guesses.sample
+        elsif @computer_player.hits.length > 1
+          case @human_player.board.adjacent?(@computer_player.hits.last(2))
+          when 'row'
+            possible_guesses = @computer_player.hits.last(2).flat_map {|hit| @human_player.board.find_adjacent_cells(hit, @human_player.board.rows)}
+            guess = possible_guesses.sample
+          when 'column'
+            possible_guesses = @computer_player.hits.last(2).flat_map {|hit| @human_player.board.find_adjacent_cells(hit, @human_player.board.columns)}
+            guess = possible_guesses.sample
+          else
+             guess = @human_player.board.cells.keys.sample
+          end
         else
           guess = @human_player.board.cells.keys.sample
         end
