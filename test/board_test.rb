@@ -56,8 +56,15 @@ class BoardTest < Minitest::Test
     assert_equal 'Invalid Input',  @board.place_ship(@cruiser, ['F3', 'C2', 'D4'])
   end
 
+  def test_adjacent_cells
+    assert_equal ['B1', 'B3'], @board.find_adjacent_cells('B2', @board.rows)
+    assert_equal ['A2', 'C2'], @board.find_adjacent_cells('B2', @board.columns)
+  end
 
-  
+  def test_all_adjacent_cells
+    assert_equal ['B1', 'B3', 'A2', 'C2'], @board.find_all_adjacent_cells('B2')
+  end
+
   def test_generate_possible_placements
     eachcons = Array.new
     @board.rows.each {|row| row.each_cons(3) {|coordinates| eachcons << coordinates}}
@@ -79,5 +86,3 @@ class BoardTest < Minitest::Test
                       "D #{@board.cells['D1'].render(true)} #{@board.cells['D2'].render(true)} #{@board.cells['D3'].render(true)} #{@board.cells['D4'].render(true)}", @board.render(true)
   end
 end
-
-
