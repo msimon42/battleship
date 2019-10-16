@@ -48,6 +48,16 @@ class Board
     end
   end
 
+  def adjacent?(cells)
+    if self.find_adjacent_cells(cells[0], @rows).include?(cells[1])
+      'row'
+    elsif self.find_adjacent_cells(cells[0], @columns).include?(cells[1])
+      'column'
+    else
+      'no'
+    end     
+  end
+
   def find_all_adjacent_cells(cell)
     rows = find_adjacent_cells(cell, @rows)
     columns = find_adjacent_cells(cell, @columns)
@@ -87,7 +97,6 @@ class Board
       end
     end
   end
-
 
   def render(player=false)
      if player
