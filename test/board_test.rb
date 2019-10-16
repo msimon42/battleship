@@ -56,6 +56,13 @@ class BoardTest < Minitest::Test
     assert_equal 'Invalid Input',  @board.place_ship(@cruiser, ['F3', 'C2', 'D4'])
   end
 
+  def test_adjacent?
+    assert_equal 'row', @board.adjacent?(['B1', 'B2'])
+    assert_equal 'column', @board.adjacent?(['B2', 'C2'])
+    assert_equal 'no', @board.adjacent?(['C2', 'C4'])
+    assert_equal 'no', @board.adjacent?(['C2', 'A2'])
+  end
+
   def test_adjacent_cells
     assert_equal ['B1', 'B3'], @board.find_adjacent_cells('B2', @board.rows)
     assert_equal ['A2', 'C2'], @board.find_adjacent_cells('B2', @board.columns)
