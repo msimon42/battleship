@@ -43,6 +43,7 @@ class Game
       computer_guess = self.guess(@computer_player)
       turn = Turn.new(computer_guess, human_guess, self.computer_player, self.human_player)
       puts turn.human_fire_shot
+      break if @computer_player.ships_sunk?
       puts turn.computer_fire_shot
       self.render_boards
     end
