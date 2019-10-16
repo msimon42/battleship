@@ -9,8 +9,9 @@ class Ship
   end
 
   def hit
-    @health -= 1
-
+    if @health > 0
+      @health -= 1
+    end
     if @health == 0
       @sunk = true
     end
