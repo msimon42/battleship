@@ -22,8 +22,15 @@ class CellTest < Minitest::Test
     refute @cell.ship
   end
 
+
   def test_if_empty_to_start
     assert_equal true, @cell.empty?
+  end
+
+  def test_fired_upon
+    refute @cell.fired_upon?
+    @cell.fire_upon
+    assert_equal true, @cell.fired_upon?
   end
 
   def test_place_ship
@@ -37,6 +44,7 @@ class CellTest < Minitest::Test
     # Need new tests for return Miss, Sunk, Hit
     @cell.fire_upon
     assert @cell.fired_upon?
+
   end
 
   def test_fired_upon_status_changes_correctly
@@ -47,6 +55,7 @@ class CellTest < Minitest::Test
   end
 
   def test_ship_health_changes_correctly
+
   end
 
   def test_render_empty_cell
@@ -64,14 +73,16 @@ class CellTest < Minitest::Test
     assert_equal 'H', @cell.render
   end
 
+  def test_render_ship
+    @cell.place_ship(@ship_1)
+    assert_equal 'S', @cell.render(true)
+  end
+
   def test_render_sunk
     @cell.place_ship(@ship_1)
     @ship_1.hit
     @ship_1.hit
     @cell.fire_upon
     assert_equal 'X', @cell.render
-  end
-
-  def test_render_ship_for_true_board
   end
 end
