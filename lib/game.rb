@@ -62,8 +62,8 @@ class Game
 
   def turn_loop
     until @human_player.ships_sunk? || @computer_player.ships_sunk?
-      human_guess = @human_player.guess
-      computer_guess = @computer_player.guess
+      human_guess = self.guess(@human_player)
+      computer_guess = self.guess(@computer_player)
       turn = Turn.new(computer_guess, human_guess, self.computer_player, self.human_player)
       puts turn.human_fire_shot
       puts turn.computer_fire_shot
@@ -101,6 +101,26 @@ class Game
       @winner = @computer_player
     elsif @computer_player.ships_sunk?
       @winner = @human_player
+    end
+  end
+
+  def guess(player)
+    if player == @computer_player
+      loop do
+        if @computer_player.hits.length > 0
+          guess = @human_player.board.cells[hits.last.succ]
+        else
+          guess = @human_player.board.cells.keys.sample
+        end
+        return guess if @human_player.board.valid_coordinate?(guess)
+      end
+    else
+      loop do
+        puts "Enter your guess: "
+        guess = gets.chomp
+        return guess if @computer_player.board.valid_coordinate?(guess)
+        puts "Coordinate not found or has already been fired upon."
+      end
     end
   end
 

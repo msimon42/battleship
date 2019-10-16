@@ -8,14 +8,18 @@ class Turn
     @human_player = human_player
   end
 
+
+
   def computer_fire_shot
      shot = self.human_player.board.fire_upon(@comp_guess)
      if shot == 'Hit'
        puts @comp_player.speak(:computer_hit, @comp_guess)
+       @comp_player.record_hit(@comp_guess)
      elsif shot == 'Miss'
        puts @comp_player.speak(:computer_miss, @comp_guess)
      elsif shot == 'Sunk'
        puts @comp_player.speak(:computer_sunk, @comp_guess, @human_player.board.cells[@comp_guess].ship.name)
+       @comp_player.clear_hits
      end
   end
 
