@@ -2,12 +2,11 @@ require_relative 'ship'
 class Cell
   attr_reader :coordinates, :ship, :empty, :adjacent_cells
 
-  def initialize(coordinates,)
+  def initialize(coordinates)
     @coordinates = coordinates
     @ship = nil
     @empty = true
     @fired_upon = false
-    @adjacent_cells = Array.new
   end
 
   def place_ship(ship)
@@ -19,22 +18,18 @@ class Cell
    @fired_upon
   end
 
-  def find_adjacent_cells
-
-  end
-
   def fire_upon
-    @fired_upon = true
-    if self.ship
-      @ship.hit
-    else
-      return 'Miss'
-    end
-    if self.ship.sunk
-      'Sunk'
-    else
-      'Hit'
-    end
+      @fired_upon = true
+      if self.ship
+        @ship.hit
+      else
+        return 'Miss'
+      end
+      if self.ship.sunk
+        'Sunk'
+      else
+        'Hit'
+      end
   end
 
   def render(player=false)
