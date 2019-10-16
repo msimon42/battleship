@@ -30,7 +30,7 @@ class Turn
     elsif shot == 'Miss'
       puts @comp_player.speak(:human_miss, @human_guess)
     elsif shot == 'Sunk'
-      puts @comp_player.speak(:human_sunk, @human_guess, @comp_player.board.cells[@comp_guess].ship.name)
+      puts @comp_player.speak(:human_sunk, @human_guess, @comp_player.board.cells[@human_guess].ship.name)
     end
   end
 end
