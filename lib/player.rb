@@ -3,12 +3,13 @@ require_relative 'ship'
 require_relative 'cell'
 
 class Player
-  attr_reader :is_computer, :board, :ships
+  attr_reader :is_computer, :board, :ships, :hits
 
   def initialize(is_computer=false)
     @is_computer = is_computer
     @board = Board.new
     @ships = {:Cruiser=>Ship.new('Cruiser', 3), :Submarine=>Ship.new('Submarine', 2)}
+    @hits = Array.new
   end
 
   # def guess
@@ -29,6 +30,14 @@ class Player
 
   def ships_sunk?
     @ships.all? {|ship| ship[1].sunk}
+  end
+
+  def record_hit(guess)
+    @hits << guess
+  end
+
+  def clear_hits
+    @hits = []
   end
 
   def generate_placement(ship)

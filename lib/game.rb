@@ -81,7 +81,11 @@ class Game
   def guess(player)
     if player == @computer_player
       loop do
-        guess = @human_player.board.cells.keys.sample
+        if @computer_player.hits.length > 0
+          guess = @human_player.board.cells[hits.last.succ]
+        else
+          guess = @human_player.board.cells.keys.sample
+        end
         return guess if @human_player.board.valid_coordinate?(guess)
       end
     else
