@@ -3,32 +3,25 @@ require_relative 'ship'
 require_relative 'cell'
 
 class Player
-  attr_reader :is_computer, :board, :ships
+  attr_reader :is_computer, :board, :ships, :hits
 
   def initialize(is_computer=false)
     @is_computer = is_computer
     @board = Board.new
     @ships = {:Cruiser=>Ship.new('Cruiser', 3), :Submarine=>Ship.new('Submarine', 2)}
+    @hits = Array.new
   end
-
-  # def guess
-  #   if self.is_computer
-  #     loop do
-  #       guess = @board.cells.keys.sample
-  #       return guess if @board.valid_coordinate?(guess)
-  #     end
-  #   else
-  #     loop do
-  #       puts "Enter your guess: "
-  #       guess = gets.chomp
-  #       return guess if @board.valid_coordinate?(guess)
-  #       puts "Coordinate not found or has already been fired upon."
-  #     end
-  #   end
-  # end
 
   def ships_sunk?
     @ships.all? {|ship| ship[1].sunk}
+  end
+
+  def record_hit(guess)
+    @hits << guess
+  end
+
+  def clear_hits
+    @hits = []
   end
 
   def generate_placement(ship)

@@ -1,5 +1,6 @@
 require_relative 'cell'
 require_relative 'ship'
+#require 'pry'
 class Board
   attr_reader :cells, :rows, :columns
 
@@ -33,6 +34,34 @@ class Board
 
   def fire_upon(cell)
     self.cells[cell].fire_upon
+  end
+
+  def find_adjacent_cells(cell, array)
+    adjacent_cells = Array.new
+    segment = array.index {  |i| i.include?(cell)}
+    index = array[segment].index(cell)
+    if index > 0
+      adjacent_cells << array[segment][index - 1]
+      adjacent_cells << array[segment][index + 1]
+    else
+      adjacent_cells << array[segment][index + 1]
+    end
+  end
+
+  def adjacent?(cells)
+    if self.find_adjacent_cells(cells[0], @rows).include?(cells[1])
+      'row'
+    elsif self.find_adjacent_cells(cells[0], @columns).include?(cells[1])
+      'column'
+    else
+      'no'
+    end     
+  end
+
+  def find_all_adjacent_cells(cell)
+    rows = find_adjacent_cells(cell, @rows)
+    columns = find_adjacent_cells(cell, @columns)
+    rows + columns
   end
 
   def generate_possible_placements(ship)
@@ -69,7 +98,6 @@ class Board
     end
   end
 
-
   def render(player=false)
      if player
        "  1 2 3 4 \n" + "A #{self.cells['A1'].render(true)} #{self.cells['A2'].render(true)} #{self.cells['A3'].render(true)} #{self.cells['A4'].render(true)}\n" +
@@ -86,4 +114,3 @@ class Board
       end
   end
 end
-
