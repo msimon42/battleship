@@ -20,18 +20,31 @@ class BoardTest < Minitest::Test
     assert_instance_of Hash, @board.cells
   end
 
+  def test_hash_values_are_cell_objects
+    assert_instance_of Cell, @board.cells['A1']
+  end
+
   def test_board_size
     assert_equal 16, @board.cells.length
   end
 
-  def test_cells_are_cells
-    assert_instance_of Cell, @board.cells['C2']
-  end
-
   def test_valid_coordinate?
     assert @board.valid_coordinate?('A2')
+    assert @board.valid_coordinate?('D4')
     refute @board.valid_coordinate?('F5')
+    refute @board.valid_coordinate?('Z1')
+    refute @board.valid_coordinate?('A5')
+    refute @board.valid_coordinate?('AA')
+    refute @board.valid_coordinate?('11')
+    refute @board.valid_coordinate?('')
+
+    @board.fire_upon('A1')
+    refute @board.valid_coordinate?('A1')
   end
+
+  # def test_fire_upon_renders_correctly
+  #   assert_equal '.',
+  # end
 
   def test_valid_placement
     assert_equal true, @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
@@ -56,8 +69,6 @@ class BoardTest < Minitest::Test
     assert_equal 'Invalid Input',  @board.place_ship(@cruiser, ['F3', 'C2', 'D4'])
   end
 
-
-  
   def test_generate_possible_placements
     eachcons = Array.new
     @board.rows.each {|row| row.each_cons(3) {|coordinates| eachcons << coordinates}}
@@ -66,18 +77,16 @@ class BoardTest < Minitest::Test
   end
 
   def test_render
-    assert_equal "1 2 3 4 \n" +
+    assert_equal "  1 2 3 4 \n" +
                     "A #{@board.cells['A1'].render} #{@board.cells['A2'].render} #{@board.cells['A3'].render} #{@board.cells['A4'].render}\n" +
                      "B #{@board.cells['B1'].render} #{@board.cells['B2'].render} #{@board.cells['B3'].render} #{@board.cells['B4'].render}\n" +
                      "C #{@board.cells['C1'].render} #{@board.cells['C2'].render} #{@board.cells['C3'].render} #{@board.cells['C4'].render}\n" +
                      "D #{@board.cells['D1'].render} #{@board.cells['D2'].render} #{@board.cells['D3'].render} #{@board.cells['D4'].render}", @board.render
 
 
-    assert_equal "1 2 3 4 \n" + "A #{@board.cells['A1'].render(true)} #{@board.cells['A2'].render(true)} #{@board.cells['A3'].render(true)} #{@board.cells['A4'].render(true)}\n" +
+    assert_equal "  1 2 3 4 \n" + "A #{@board.cells['A1'].render(true)} #{@board.cells['A2'].render(true)} #{@board.cells['A3'].render(true)} #{@board.cells['A4'].render(true)}\n" +
                       "B #{@board.cells['B1'].render(true)} #{@board.cells['B2'].render(true)} #{@board.cells['B3'].render(true)} #{@board.cells['B4'].render(true)}\n" +
                       "C #{@board.cells['C1'].render(true)} #{@board.cells['C2'].render(true)} #{@board.cells['C3'].render(true)} #{@board.cells['C4'].render(true)}\n" +
                       "D #{@board.cells['D1'].render(true)} #{@board.cells['D2'].render(true)} #{@board.cells['D3'].render(true)} #{@board.cells['D4'].render(true)}", @board.render(true)
   end
 end
-
-
