@@ -20,18 +20,31 @@ class BoardTest < Minitest::Test
     assert_instance_of Hash, @board.cells
   end
 
+  def test_hash_values_are_cell_objects
+    assert_instance_of Cell, @board.cells['A1']
+  end
+
   def test_board_size
     assert_equal 16, @board.cells.length
   end
 
-  def test_cells_are_cells
-    assert_instance_of Cell, @board.cells['C2']
-  end
-
   def test_valid_coordinate?
     assert @board.valid_coordinate?('A2')
+    assert @board.valid_coordinate?('D4')
     refute @board.valid_coordinate?('F5')
+    refute @board.valid_coordinate?('Z1')
+    refute @board.valid_coordinate?('A5')
+    refute @board.valid_coordinate?('AA')
+    refute @board.valid_coordinate?('11')
+    refute @board.valid_coordinate?('')
+
+    @board.fire_upon('A1')
+    refute @board.valid_coordinate?('A1')
   end
+
+  # def test_fire_upon_renders_correctly
+  #   assert_equal '.',
+  # end
 
   def test_valid_placement
     assert_equal true, @board.valid_placement?(@cruiser, ['A1', 'A2', 'A3'])
