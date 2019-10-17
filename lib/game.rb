@@ -16,7 +16,7 @@ class Game
     puts '*' * 75
     puts "Press 'p' to play"
     puts "Press 'q' to quit"
-    input = gets.chomp
+    input = gets.chomp.downcase
   end
 
   def place_computer_ships
@@ -27,7 +27,7 @@ class Game
   def ask_for_ship_coordinates(ship)
     loop do
       puts "Enter the coordinates for your #{ship.name}: "
-      ship_coordinates = gets.chomp
+      ship_coordinates = gets.chomp.upcase
       unless @human_player.board.valid_placement?(@human_player.ships[ship.name.capitalize.to_sym], ship_coordinates.tr(",", "").split(" "))
          puts "The coordinates for your #{ship.name} are invalid. Please try again"
           next
@@ -37,11 +37,7 @@ class Game
   end
 
   def render_boards
-<<<<<<< HEAD
     puts '=============YOUR BOARD=============='
-=======
-    puts '==============YOUR BOARD=============='
->>>>>>> 32f80cfadd6fa2535f036bb87a178480b63b3afb
     puts @human_player.board.render(true)
     puts ''
     puts '============COMPUTER BOARD============'
@@ -71,28 +67,6 @@ class Game
     end
   end
 
-<<<<<<< HEAD
-=======
-  def main_menu
-    puts "WELCOME TO BATTLESHIP"
-    puts '*' * 75
-    puts "Press 'p' to play"
-    puts "Press 'q' to quit"
-    input = gets.chomp
-  end
-
-  def start
-    self.place_computer_ships
-    puts self.computer_player.speak(:beginning)
-    puts @human_player.board.render(true)
-    cruiser_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Cruiser])
-    @human_player.place_ship(@human_player.ships[:Cruiser], cruiser_coordinates.tr(",", "").split(" "))
-    puts @human_player.board.render(true)
-    sub_coordinates = self.ask_for_ship_coordinates(@human_player.ships[:Submarine])
-    @human_player.place_ship(@human_player.ships[:Submarine], sub_coordinates.tr(",", "").split(" "))
-  end
-
->>>>>>> 32f80cfadd6fa2535f036bb87a178480b63b3afb
   def play_game
     puts "Let's Begin!"
     self.render_boards
@@ -113,7 +87,7 @@ class Game
     else
       loop do
         puts "Enter your guess: "
-        guess = gets.chomp
+        guess = gets.chomp.upcase
         return guess if @computer_player.board.valid_coordinate?(guess)
         puts "Coordinate not found or has already been fired upon."
       end
@@ -129,13 +103,5 @@ class Game
       puts 'Nobody won..?'
     end
   end
-<<<<<<< HEAD
 
 end
-
-# game = Game.new
-# puts game.start
-# puts game.play_game
-=======
-end
->>>>>>> 32f80cfadd6fa2535f036bb87a178480b63b3afb
